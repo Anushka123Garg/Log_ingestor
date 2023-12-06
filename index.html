@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Query UI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            margin: 5px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Log Query UI</h1>
+    <label for="field">Select Field:</label>
+    <select id="field">
+        <option value="level">Level</option>
+        <option value="message">Message</option>
+        <option value="resourceId">Resource ID</option>
+        <option value="timestamp">Timestamp</option>
+        <option value="traceId">Trace ID</option>
+        <option value="spanId">Span ID</option>
+        <option value="commit">Commit</option>
+        <option value="parentResourceId">Parent Resource ID</option>
+    </select>
+    <br>
+    <label for="value">Enter Value:</label>
+    <input type="text" id="value">
+    <button onclick="queryLogs()">Query Logs</button>
+    <br>
+    <table id="logTable">
+        <thead>
+            <tr>
+                <th>Level</th>
+                <th>Message</th>
+                <th>Resource ID</th>
+                <th>Timestamp</th>
+                <th>Trace ID</th>
+                <th>Span ID</th>
+                <th>Commit</th>
+                <th>Parent Resource ID</th>
+            </tr>
+        </thead>
+        <tbody id="logTableBody"></tbody>
+    </table>
+
+    <script>
+        function queryLogs() {
+            const field = document.getElementById("field").value;
+            const value = document.getElementById("value").value;
+
+            fetch(`/query?field=${field}&value=${value}`)
+                .then(response => response.json())
+                .then(data => displayLogs(data));
+        }
+
+        function displayLogs(logs) {
+            const tableBody = document.getElementById("logTableBody");
+            tableBody.innerHTML = "";
+
+            logs.forEach(log => {
+                const row = tableBody.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                const cell3 = row.insertCell(2);
+                const cell4 = row.insertCell(3);
+                const cell5 = row.insertCell(4);
+                const cell6 = row.insertCell(5);
+                const cell7 = row.insertCell(6);
+                const cell8 = row.insertCell(7);
+
+                cell1.innerHTML = log.level;
+            });
+        }
+    </script>
+</body>
+</html>

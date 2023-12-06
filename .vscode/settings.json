@@ -1,0 +1,10 @@
+{
+    "cmake.configureOnOpen": true,
+    "cmake.sourceDirectory": "C:/Users/anush/OneDrive/Desktop/log ingestor/cpp-httplib",
+    "files.associations": {
+        "*.py": "python",
+        "iostream": "cpp",
+        "cstdlib": "cpp",
+        "condition_variable": "cpp"
+    }
+}
